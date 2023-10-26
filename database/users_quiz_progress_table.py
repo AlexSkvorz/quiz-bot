@@ -3,12 +3,12 @@
 def create_table(db_connection):
     cursor = db_connection.cursor()
 
-    cursor.execute("SELECT name FROM sqlite_master WHERE TYPE = 'table' AND NAME = 'users_quiz_progress';")
+    cursor.execute("SELECT name FROM sqlite_master WHERE TYPE = 'table' AND NAME = 'user_quiz_progress_table';")
     query_result = cursor.fetchone()
 
     if not query_result:
         cursor.execute('''
-            CREATE TABLE user_quiz_progress (
+            CREATE TABLE user_quiz_progress_table (
             user_id INTEGER,
             quiz_id INTEGER,
             completed BOOL,

@@ -8,7 +8,7 @@ def create_table(db_connection):
 
     if not query_result:
         cursor.execute('''
-            CREATE TABLE questions (
+            CREATE TABLE questions_table (
             quiz_id INTEGER PRIMARY KEY,
             topic TEXT,
             question TEXT,
