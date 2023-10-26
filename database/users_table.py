@@ -8,7 +8,7 @@ def create_table(db_connection):
 
     if not query_result:
         cursor.execute('''
-            CREATE TABLE users
+            CREATE TABLE users_table
             (user_id INTEGER PRIMARY KEY,
             username TEXT,
             role INTEGER)
