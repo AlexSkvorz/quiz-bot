@@ -1,16 +1,9 @@
-import sqlite3
-
-from config.storage_config import STORAGE_CONFIG
 from database import questions_table
 from database import users_quiz_progress_table
 from database import users_table
 
 
-def create_db_connection():
-    db_connection = sqlite3.connect(STORAGE_CONFIG['DB_NAME'], check_same_thread=False)
-
-    questions_table.create_table(db_connection)
-    users_quiz_progress_table.create_table(db_connection)
-    users_table.create_table(db_connection)
-
-    return db_connection
+async def create_tables():
+    await questions_table.create_table()
+    await users_quiz_progress_table.create_table()
+    await users_table.create_table()

@@ -5,8 +5,7 @@ from telegram_bot.bot_handlers.handle_start_command import handle_start_command
 
 
 class QuizBot:
-    def __init__(self, db_connection):
-        self.db_connection = db_connection
+    def __init__(self):
         self.bot = AsyncTeleBot(BOT_CONFIG['TOKEN'])
 
         self.initialize_handlers()
