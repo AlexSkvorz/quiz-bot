@@ -1,19 +1,15 @@
+import aiosqlite
+from config.storage_config import STORAGE_CONFIG
 
 
-def create_table(db_connection):
-    cursor = db_connection.cursor()
-
-    cursor.execute("SELECT name FROM sqlite_master WHERE TYPE = 'table' AND NAME = 'questions_table';")
-    query_result = cursor.fetchone()
-
-    if not query_result:
-        cursor.execute('''
-            CREATE TABLE questions_table (
+async def create_table():
+    async with aiosqlite.connect(STORAGE_CONFIG['DB_NAME']) as db:
+        await db.execute('''
+            CREATE TABLE IF NOT EXISTS questions_table (
             quiz_id INTEGER PRIMARY KEY,
             topic TEXT,
             question TEXT,
             answers TEXT,
             correct_answer TEXT)
             ''')
-
-    db_connection.commit()
+        await db.commit()

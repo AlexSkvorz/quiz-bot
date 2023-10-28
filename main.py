@@ -1,14 +1,14 @@
 import asyncio
 
 from telegram_bot.quiz_bot import QuizBot
-from database.create_connection import create_db_connection
+from database.create_connection import create_tables
 
 
-def main():
-    db_connection = create_db_connection()
-    quiz_bot = QuizBot(db_connection).bot
-    asyncio.run(quiz_bot.polling(none_stop=True, interval=0))
+async def main():
+    await create_tables()
+    quiz_bot = QuizBot().bot
+    await quiz_bot.polling(none_stop=True, interval=0)
 
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
