@@ -13,3 +13,4 @@ async def create_table():
             correct_answer TEXT)
             ''')
         await db.commit()
+
