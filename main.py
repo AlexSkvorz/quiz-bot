@@ -1,6 +1,6 @@
 import asyncio
 
-from data_scraper.data_scraper import scrap_data
+from data_parcing.json_parcer import scrap_data
 
 from telegram_bot.quiz_bot import QuizBot
 from database.create_connection import create_tables
