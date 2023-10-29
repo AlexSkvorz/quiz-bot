@@ -8,7 +8,6 @@ asyncio = "*"
 telebot = "*"
 aiohttp = "*"
 aiosqlite = "*"
-aiofiles = "*"
 
 [dev-packages]
 
