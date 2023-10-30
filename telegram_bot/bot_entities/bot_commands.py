@@ -3,5 +3,6 @@ import enum
 
 class BotCommands(enum.Enum):
     START = 'start'
-    START_QUIZ = 'quiz'
+    START_QUIZ = 'start_quiz'
     ADD_QUESTIONS = 'add_questions'
+    VIEW_STATISTIC = 'view_statistic'
