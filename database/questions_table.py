@@ -1,5 +1,4 @@
 import aiosqlite
-import json
 from config.storage_config import STORAGE_CONFIG
 
 
