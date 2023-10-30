@@ -25,5 +25,4 @@ async def fetch_user_role(user_id):
     async with aiosqlite.connect(STORAGE_CONFIG['DB_NAME']) as db:
         cursor = await db.execute("SELECT role FROM users_table WHERE user_id = ?", parameters=(user_id,))
         query_result = await cursor.fetchone()
-        await db.commit()
         return query_result
