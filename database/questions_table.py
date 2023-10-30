@@ -22,3 +22,10 @@ async def insert_questions(quiz_id, topic, question, answers, correct_answer):
                          parameters=(quiz_id, topic, question, answers, correct_answer)
                          )
         await db.commit()
+
+
+async def fetch_unique_topics():
+    async with aiosqlite.connect(STORAGE_CONFIG['DB_NAME']) as db:
+        cursor = await db.execute("SELECT DISTINCT topic FROM questions_table")
+        query_result = await cursor.fetchall()
+        return query_result
