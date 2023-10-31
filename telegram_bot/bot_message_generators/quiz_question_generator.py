@@ -2,12 +2,12 @@ from telegram_bot.bot_entities.bot_commands import BotCommands
 from telegram_bot.bot_message_generators.create_inline_keyboard import create_inline_keyboard
 
 
-async def send_quiz_question(bot, chat_id, message_id, question, answers, correct_answer):
+async def send_quiz_question(bot, chat_id, message_id, quiz_id, question, answers, correct_answer):
     message = f'{question}'
 
-    button_parameters = {answer: f'select_answer_{answer}' for answer in answers}
+    button_parameters = {answer: f'select_answer_{answer}_quiz_id={quiz_id}' for answer in answers}
 
-    button_parameters[correct_answer] += '_correct'
+    button_parameters[correct_answer] += f'_correct'
 
     button_parameters['Завершить викторину'] = BotCommands.END_QUIZ.value
 
