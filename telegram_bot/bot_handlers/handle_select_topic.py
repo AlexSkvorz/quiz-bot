@@ -7,4 +7,11 @@ async def handle_select_topic(bot, call):
 
     quantity_unique_questions = await fetch_quantity_unique_questions(user_id=call.from_user.id, topic=topic)
 
-    await create_start_quiz_menu(bot=bot, call=call, quantity_unique_questions=quantity_unique_questions[0])
+    await create_start_quiz_menu(
+        bot=bot,
+        username=call.from_user.username,
+        chat_id=call.message.chat.id,
+        message_id=call.message.message_id,
+        quantity_unique_questions=quantity_unique_questions[0],
+        topic=topic
+    )
