@@ -15,3 +15,13 @@ async def create_table():
             FOREIGN KEY (quiz_id) REFERENCES questions_table(quiz_id) ON DELETE CASCADE)
             ''')
         await db.commit()
+
+
+async def insert_user_answer(user_id, quiz_id, completed, score):
+    async with aiosqlite.connect(STORAGE_CONFIG['DB_NAME']) as db:
+        await db.execute("INSERT INTO user_quiz_progress_table "
+                         "(user_id, quiz_id, completed, score) "
+                         "VALUES(?, ?, ?, ?)",
+                         parameters=(user_id, quiz_id, completed, score)
+                         )
+        await db.commit()
