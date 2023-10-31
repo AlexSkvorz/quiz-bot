@@ -43,13 +43,13 @@ async def fetch_quantity_unique_questions(user_id, topic):
         return query_result
 
 
-async def fetch_unique_questions(user_id, topic):
+async def fetch_unique_question(user_id, topic):
     async with aiosqlite.connect(STORAGE_CONFIG['DB_NAME']) as db:
         cursor = await db.execute("SELECT questions.question, questions.answers, questions.correct_answer "
                                   "FROM questions_table AS questions "
                                   "LEFT JOIN user_quiz_progress_table AS progress "
                                   "ON questions.quiz_id = progress.quiz_id AND progress.user_id = ? "
-                                  "WHERE progress.user_id IS NULL AND questions.topic = ? LIMIT 5"
+                                  "WHERE progress.user_id IS NULL AND questions.topic = ? LIMIT 1"
                                   "", parameters=(user_id, topic,))
         query_result = await cursor.fetchall()
         return query_result

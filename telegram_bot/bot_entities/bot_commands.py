@@ -9,3 +9,5 @@ class BotCommands(enum.Enum):
     SELECT_TOPIC = 'select_topic'
     TO_START = 'to_start'
     START_QUIZ = 'start_quiz'
+    SELECT_ANSWER = 'select_answer'
+    END_QUIZ = 'end_quiz'
