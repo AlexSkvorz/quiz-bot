@@ -1,4 +1,4 @@
-from telegram_bot.bot_message_generators.create_buttons import create_buttons
+from telegram_bot.bot_message_generators.create_inline_keyboard import create_inline_keyboard
 from constants import ADMIN
 from telegram_bot.bot_entities.bot_commands import BotCommands
 
@@ -7,14 +7,14 @@ async def send_welcome_message(bot, chat_id, username, user_role):
     welcome_message = f'Привет, {username}, я Бот-Викторина! Выберите действие:'
 
     button_parameters = {
-        'Викторина': BotCommands.START_QUIZ.value,
+        'Викторина': BotCommands.SELECT_QUIZ.value,
         'Статистика': BotCommands.VIEW_STATISTIC.value
     }
 
     if user_role == ADMIN:
         button_parameters['Добавить вопросы'] = BotCommands.ADD_QUESTIONS.value
 
-    markup = create_buttons(
+    markup = create_inline_keyboard(
         button_parameters=button_parameters
     )
 
