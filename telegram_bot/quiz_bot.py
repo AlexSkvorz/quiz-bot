@@ -1,8 +1,11 @@
 from telebot.async_telebot import AsyncTeleBot
 from config.bot_config import BOT_CONFIG
+
 from telegram_bot.bot_entities.bot_commands import BotCommands
+
 from telegram_bot.bot_handlers.handle_start_command import handle_start_command
 from telegram_bot.bot_handlers.handle_create_quiz_menu import handle_create_quiz_menu
+from telegram_bot.bot_handlers.handle_select_topic import handle_select_topic
 
 
 class QuizBot:
@@ -16,10 +19,17 @@ class QuizBot:
         async def start(message):
             await handle_start_command(bot=self.bot, message=message)
 
-        @self.bot.callback_query_handler(func=lambda call: call.data == BotCommands.START_QUIZ.value)
+        @self.bot.callback_query_handler(func=lambda call: call.data == BotCommands.SELECT_QUIZ.value)
         async def create_quiz_menu_callback(call):
             await handle_create_quiz_menu(
                 bot=self.bot,
                 chat_id=call.message.chat.id,
                 message_id=call.message.message_id
+            )
+
+        @self.bot.callback_query_handler(func=lambda call: call.data.startswith(BotCommands.SELECT_TOPIC.value))
+        async def select_topic_callback(call):
+            await handle_select_topic(
+                bot=self.bot,
+                call=call
             )

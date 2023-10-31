@@ -1,7 +1,7 @@
 from telebot import types
 
 
-def create_buttons(button_parameters):
+def create_inline_keyboard(button_parameters):
     markup = types.InlineKeyboardMarkup()
 
     for key in button_parameters.keys():
