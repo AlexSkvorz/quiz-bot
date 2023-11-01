@@ -10,4 +10,3 @@ class BotCommands(enum.Enum):
     TO_START = 'to_start'
     SEND_QUESTION = 'send_question'
     SELECT_ANSWER = 'select_answer'
-    END_QUIZ = 'end_quiz'
