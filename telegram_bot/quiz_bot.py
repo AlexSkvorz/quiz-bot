@@ -36,7 +36,7 @@ class QuizBot:
                 call=call
             )
 
-        @self.bot.callback_query_handler(func=lambda call: call.data.startswith(BotCommands.START_QUIZ.value))
+        @self.bot.callback_query_handler(func=lambda call: call.data.startswith(BotCommands.SEND_QUESTION.value))
         async def send_question_callback(call):
             await handle_send_question(
                 bot=self.bot,
