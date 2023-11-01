@@ -5,18 +5,9 @@ from telegram_bot.bot_message_generators.next_quiz_step_generator import create_
 
 
 async def handle_check_user_answer(bot, call):
-    user_answer = call.data
     user_id = call.from_user.id
-    correct_answer = None
 
-    if 'correct' in user_answer:
-        user_answer = user_answer.replace('_correct', '')
-        quiz_id = int(user_answer.split('quiz_id=')[1])
-        completed, score = 1, 1
-    else:
-        quiz_id = int(user_answer.split('quiz_id=')[1])
-        completed, score = 0, 0
-        correct_answer = await fetch_correct_answer(quiz_id)
+    quiz_id, completed, score, correct_answer = await parse_callback_data(user_answer=call.data)
 
     actual_topic = await fetch_actual_topic(quiz_id=quiz_id)
 
@@ -35,3 +26,16 @@ async def handle_check_user_answer(bot, call):
         topic=actual_topic[0]
     )
 
+
+async def parse_callback_data(user_answer):
+    if 'correct' in user_answer:
+        user_answer = user_answer.replace('_correct', '')
+        quiz_id = int(user_answer.split('quiz_id=')[1])
+        completed, score = 1, 1
+        correct_answer = None
+    else:
+        quiz_id = int(user_answer.split('quiz_id=')[1])
+        completed, score = 0, 0
+        correct_answer = await fetch_correct_answer(quiz_id)
+
+    return quiz_id, completed, score, correct_answer
