@@ -8,6 +8,7 @@ from telegram_bot.bot_handlers.handle_create_quiz_menu import handle_create_quiz
 from telegram_bot.bot_handlers.handle_select_topic import handle_select_topic
 from telegram_bot.bot_handlers.handle_send_question import handle_send_question
 from telegram_bot.bot_handlers.handle_check_user_answer import handle_check_user_answer
+from telegram_bot.bot_handlers.handle_to_start import handle_to_start
 
 
 class QuizBot:
@@ -46,6 +47,13 @@ class QuizBot:
         @self.bot.callback_query_handler(func=lambda call: call.data.startswith(BotCommands.SELECT_ANSWER.value))
         async def check_user_answer_callback(call):
             await handle_check_user_answer(
+                bot=self.bot,
+                call=call
+            )
+
+        @self.bot.callback_query_handler(func=lambda call: call.data == BotCommands.TO_START.value)
+        async def to_start_callback(call):
+            await handle_to_start(
                 bot=self.bot,
                 call=call
             )
