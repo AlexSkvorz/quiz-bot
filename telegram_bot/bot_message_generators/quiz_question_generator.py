@@ -9,7 +9,7 @@ async def send_quiz_question(bot, chat_id, message_id, quiz_id, question, answer
 
     button_parameters[correct_answer] += f'_correct'
 
-    button_parameters['Завершить викторину'] = BotCommands.END_QUIZ.value
+    button_parameters['Завершить викторину'] = BotCommands.TO_START.value
 
     markup = create_inline_keyboard(button_parameters=button_parameters)
 
