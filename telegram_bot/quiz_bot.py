@@ -8,6 +8,8 @@ from telegram_bot.bot_handlers.handle_create_quiz_menu import handle_create_quiz
 from telegram_bot.bot_handlers.handle_select_topic import handle_select_topic
 from telegram_bot.bot_handlers.handle_send_question import handle_send_question
 from telegram_bot.bot_handlers.handle_check_user_answer import handle_check_user_answer
+from telegram_bot.bot_handlers.handle_add_questions import handle_add_questions
+from telegram_bot.bot_handlers.handle_download_json import handle_download_json
 from telegram_bot.bot_handlers.handle_to_start import handle_to_start
 
 
@@ -50,6 +52,15 @@ class QuizBot:
                 bot=self.bot,
                 call=call
             )
+
+        @self.bot.callback_query_handler(func=lambda call: call.data == BotCommands.ADD_QUESTIONS.value)
+        async def add_questions_callback(call):
+            await handle_add_questions(bot=self.bot, call=call)
+            self.bot.register_message_handler(download_json_callback)
+
+        @self.bot.message_handler(content_types=['document'])
+        async def download_json_callback(message):
+            await handle_download_json(bot=self.bot, message=message)
 
         @self.bot.callback_query_handler(func=lambda call: call.data == BotCommands.TO_START.value)
         async def to_start_callback(call):
