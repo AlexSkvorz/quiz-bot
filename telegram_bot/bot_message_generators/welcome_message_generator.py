@@ -3,7 +3,8 @@ from constants import ADMIN
 from telegram_bot.bot_entities.bot_commands import BotCommands
 
 
-async def send_welcome_message(bot, chat_id, username, user_role):
+async def send_welcome_message(bot, chat_id, message_id, username, user_role):
+
     welcome_message = f'Привет, {username}, я Бот-Викторина! Выберите действие:'
 
     button_parameters = {
@@ -18,4 +19,7 @@ async def send_welcome_message(bot, chat_id, username, user_role):
         button_parameters=button_parameters
     )
 
-    await bot.send_message(chat_id, welcome_message, reply_markup=markup)
+    if message_id is None:
+        await bot.send_message(chat_id, welcome_message, reply_markup=markup)
+    else:
+        await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=welcome_message, reply_markup=markup)
