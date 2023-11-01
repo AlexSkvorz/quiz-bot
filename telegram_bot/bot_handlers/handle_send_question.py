@@ -5,7 +5,7 @@ import json
 
 
 async def handle_send_question(bot, call):
-    topic = call.data.replace('start_quiz_', '')
+    topic = call.data.replace('send_question_', '')
 
     unique_question = await fetch_unique_question(user_id=call.from_user.id, topic=topic)
 

@@ -8,6 +8,6 @@ class BotCommands(enum.Enum):
     VIEW_STATISTIC = 'view_statistic'
     SELECT_TOPIC = 'select_topic'
     TO_START = 'to_start'
-    START_QUIZ = 'start_quiz'
+    SEND_QUESTION = 'send_question'
     SELECT_ANSWER = 'select_answer'
     END_QUIZ = 'end_quiz'
