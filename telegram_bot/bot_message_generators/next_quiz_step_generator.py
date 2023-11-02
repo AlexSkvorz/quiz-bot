@@ -8,9 +8,11 @@ async def create_next_quiz_step(bot, chat_id, message_id, correct_answer, topic)
     else:
         message = f'К сожалению, Вы ошиблись. Верный ответ: {correct_answer[0]}'
 
-    button_parameters = {'Следующий вопрос': f'send_question_{topic}'}
-
-    markup = create_inline_keyboard(button_parameters=button_parameters)
+    markup = create_inline_keyboard(
+        button_parameters={
+            'Следующий вопрос': f'send_question_{topic}'
+        }
+    )
 
     await bot.edit_message_text(
         chat_id=chat_id,

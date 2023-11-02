@@ -34,24 +34,15 @@ class QuizBot:
 
         @self.bot.callback_query_handler(func=lambda call: call.data.startswith(BotCommands.SELECT_TOPIC.value))
         async def select_topic_callback(call):
-            await handle_select_topic(
-                bot=self.bot,
-                call=call
-            )
+            await handle_select_topic(bot=self.bot, call=call)
 
         @self.bot.callback_query_handler(func=lambda call: call.data.startswith(BotCommands.SEND_QUESTION.value))
         async def send_question_callback(call):
-            await handle_send_question(
-                bot=self.bot,
-                call=call
-            )
+            await handle_send_question(bot=self.bot, call=call)
 
         @self.bot.callback_query_handler(func=lambda call: call.data.startswith(BotCommands.SELECT_ANSWER.value))
         async def check_user_answer_callback(call):
-            await handle_check_user_answer(
-                bot=self.bot,
-                call=call
-            )
+            await handle_check_user_answer(bot=self.bot, call=call)
 
         @self.bot.callback_query_handler(func=lambda call: call.data == BotCommands.ADD_QUESTIONS.value)
         async def add_questions_callback(call):
@@ -64,7 +55,4 @@ class QuizBot:
 
         @self.bot.callback_query_handler(func=lambda call: call.data == BotCommands.TO_START.value)
         async def to_start_callback(call):
-            await handle_to_start(
-                bot=self.bot,
-                call=call
-            )
+            await handle_to_start(bot=self.bot, call=call)
