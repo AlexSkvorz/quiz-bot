@@ -1,4 +1,5 @@
 from telegram_bot.bot_message_generators.create_inline_keyboard import create_inline_keyboard
+from telegram_bot.bot_entities.bot_commands import BotCommands
 
 
 async def create_next_quiz_step(bot, chat_id, message_id, correct_answer, topic):
@@ -10,7 +11,8 @@ async def create_next_quiz_step(bot, chat_id, message_id, correct_answer, topic)
 
     markup = create_inline_keyboard(
         button_parameters={
-            'Следующий вопрос': f'send_question_{topic}'
+            'Следующий вопрос': f'send_question_{topic}',
+            'Завершить викторину': BotCommands.TO_START.value
         }
     )
 

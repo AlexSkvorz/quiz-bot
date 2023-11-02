@@ -10,7 +10,7 @@ async def create_start_quiz_menu(bot, username, chat_id, message_id, quantity_un
     if quantity_unique_questions > 0:
         button_parameters = {'Начать викторину': f'send_question_{topic}'}
 
-    button_parameters['Вернуться назад'] = BotCommands.TO_START.value
+    button_parameters['Вернуться назад'] = BotCommands.SELECT_QUIZ.value
 
     markup = create_inline_keyboard(button_parameters=button_parameters)
 

@@ -10,7 +10,7 @@ async def form_download_result_message(bot, chat_id, download_result):
 
     markup = create_inline_keyboard(
         button_parameters={
-            'Вернуться назад': BotCommands.TO_START.value
+            'Вернуться в главное меню': BotCommands.TO_START.value
         }
     )
 
