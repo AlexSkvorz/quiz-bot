@@ -8,6 +8,7 @@ async def create_table():
             CREATE TABLE IF NOT EXISTS questions_table (
             quiz_id INTEGER PRIMARY KEY,
             topic TEXT,
+            difficult TEXT,
             question TEXT,
             answers TEXT,
             correct_answer TEXT)
@@ -15,11 +16,11 @@ async def create_table():
         await db.commit()
 
 
-async def insert_questions(quiz_id, topic, question, answers, correct_answer):
+async def insert_questions(quiz_id, topic, difficult, question, answers, correct_answer):
     async with aiosqlite.connect(STORAGE_CONFIG['DB_NAME']) as db:
         await db.execute("INSERT OR IGNORE INTO questions_table"
-                         " (quiz_id, topic, question, answers, correct_answer) VALUES (?, ?, ?, ?, ?)",
-                         parameters=(quiz_id, topic, question, answers, correct_answer)
+                         " (quiz_id, topic, difficult, question, answers, correct_answer) VALUES (?, ?, ?, ?, ?, ?)",
+                         parameters=(quiz_id, topic, difficult, question, answers, correct_answer)
                          )
         await db.commit()
 

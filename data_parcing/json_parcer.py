@@ -10,8 +10,9 @@ async def scrap_data():
             await insert_questions(
                 quiz_id=item["quiz_id"],
                 topic=item["topic"],
+                difficult=item["difficult"],
                 question=item["question"],
-                answers=json.dumps(item["answers"]),
+                answers=json.dumps(item["answers"],ensure_ascii=False),
                 correct_answer=item["correct_answer"]
             )
         return True
