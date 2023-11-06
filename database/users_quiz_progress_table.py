@@ -25,3 +25,17 @@ async def insert_user_answer(user_id, quiz_id, completed, score):
                          parameters=(user_id, quiz_id, completed, score)
                          )
         await db.commit()
+
+
+async def fetch_user_stat_by_topic(user_id):
+    async with aiosqlite.connect(STORAGE_CONFIG['DB_NAME']) as db:
+        cursor = await db.execute("SELECT questions.topic, SUM(progress.score) "
+                                  "FROM user_quiz_progress_table AS progress "
+                                  "JOIN users_table AS users ON progress.user_id = users.user_id "
+                                  "JOIN questions_table AS questions ON progress.quiz_id = questions.quiz_id "
+                                  "WHERE users.user_id = ? "
+                                  "GROUP BY users.username, questions.topic ",
+                                  parameters=(user_id,)
+                                  )
+        query_result = await cursor.fetchall()
+        return query_result
