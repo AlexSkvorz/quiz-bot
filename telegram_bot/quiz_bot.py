@@ -11,7 +11,7 @@ from telegram_bot.bot_handlers.handle_check_user_answer import handle_check_user
 from telegram_bot.bot_handlers.handle_add_questions import handle_add_questions
 from telegram_bot.bot_handlers.handle_download_json import handle_download_json
 from telegram_bot.bot_handlers.handle_to_start import handle_to_start
-from telegram_bot.bot_handlers.handle_view_statistic import handle_view_statistic_menu
+from telegram_bot.bot_handlers.handle_view_user_achievements import handle_view_user_achievements
 
 
 class QuizBot:
@@ -58,6 +58,6 @@ class QuizBot:
         async def to_start_callback(call):
             await handle_to_start(bot=self.bot, call=call)
 
-        @self.bot.callback_query_handler(func=lambda call: call.data == BotCommands.VIEW_STATISTIC.value)
-        async def to_view_statistic_callback(call):
-            await handle_view_statistic_menu(bot=self.bot, call=call, chat_id=call.message.chat.id)
+        @self.bot.callback_query_handler(func=lambda call: call.data == BotCommands.VIEW_ACHIEVEMENTS.value)
+        async def view_user_achievements_callback(call):
+            await handle_view_user_achievements(bot=self.bot, call=call)
