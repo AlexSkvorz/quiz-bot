@@ -9,7 +9,7 @@ async def send_welcome_message(bot, chat_id, message_id, username, user_role):
 
     button_parameters = {
         'Викторина': BotCommands.SELECT_QUIZ.value,
-        'Статистика': BotCommands.VIEW_STATISTIC.value
+        'Статистика': BotCommands.VIEW_ACHIEVEMENTS.value
     }
 
     if user_role == ADMIN:
