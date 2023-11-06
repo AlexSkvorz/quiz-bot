@@ -3,24 +3,23 @@ from telegram_bot.bot_message_generators.statistic_menu_generator import send_us
 
 
 async def handle_view_user_achievements(call, bot):
-    chat_id = call.message.chat.id
     user_id = call.from_user.id
+    total_score = 0
+    topic_scores = {}
     query_user_statistic_by_topic = await fetch_user_achievements(user_id)
-    statistic_info = ""
 
     if query_user_statistic_by_topic:
-        total_score = sum(result[1] for result in query_user_statistic_by_topic)
-        topic_scores = [f"Тема: {result[0]}, Общий балл: {result[1]}" for result in query_user_statistic_by_topic]
-        statistic_info = "\n".join(topic_scores)
-    else:
-        total_score = 0
-
-    statistic_info += f"\nОбщий балл по всем темам: {total_score}"
+        for user_stat in query_user_statistic_by_topic:
+            topic = user_stat[0]
+            score = user_stat[1]
+            total_score += score
+            topic_scores[topic] = score
 
     await send_user_statistic_menu(
-        chat_id=chat_id,
+        chat_id=call.message.chat.id,
         bot=bot,
         message_id=call.message.message_id,
         username=call.from_user.username,
-        statistic_info=statistic_info
+        topic_scores=topic_scores,
+        total_score=total_score
     )
