@@ -1,13 +1,14 @@
 from database.questions_table import fetch_unique_question
 from telegram_bot.bot_message_generators.quiz_question_generator import send_quiz_question
 from telegram_bot.bot_message_generators.end_of_quiz_message_generator import send_out_questions
+from data_parcing.callback_parser import parse_user_choices
 import json
 
 
 async def handle_send_question(bot, call):
-    topic = call.data.replace('send_question_', '')
+    topic, difficult = await parse_user_choices(user_choice=call.data)
 
-    unique_question = await fetch_unique_question(user_id=call.from_user.id, topic=topic)
+    unique_question = await fetch_unique_question(user_id=call.from_user.id, topic=topic, difficult=difficult)
 
     try:
         quiz_id = unique_question[0][0]

@@ -9,4 +9,4 @@ async def create_topics_menu(unique_topics, bot, chat_id, message_id):
 
     markup = create_inline_keyboard(button_parameters=button_parameters)
 
-    await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text='Вот темы', reply_markup=markup)
+    await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text='Выберите тему', reply_markup=markup)

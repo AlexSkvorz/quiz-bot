@@ -1,15 +1,17 @@
 from database.users_quiz_progress_table import insert_user_answer
-from database.questions_table import fetch_correct_answer, fetch_actual_topic
-
+from database.questions_table import fetch_actual_topic_and_difficult
+from data_parcing.callback_parser import parse_user_answer
 from telegram_bot.bot_message_generators.next_quiz_step_generator import create_next_quiz_step
 
 
 async def handle_check_user_answer(bot, call):
     user_id = call.from_user.id
+    quiz_id, completed, score, correct_answer = await parse_user_answer(user_answer=call.data)
 
-    quiz_id, completed, score, correct_answer = await parse_callback_data(user_answer=call.data)
+    query_result = await fetch_actual_topic_and_difficult(quiz_id=quiz_id)
 
-    actual_topic = await fetch_actual_topic(quiz_id=quiz_id)
+    actual_topic = query_result[0][0]
+    actual_difficult = query_result[0][1]
 
     await insert_user_answer(
         user_id=user_id,
@@ -23,19 +25,6 @@ async def handle_check_user_answer(bot, call):
         chat_id=call.message.chat.id,
         message_id=call.message.message_id,
         correct_answer=correct_answer,
-        topic=actual_topic[0]
+        topic=actual_topic,
+        difficult=actual_difficult
     )
-
-
-async def parse_callback_data(user_answer):
-    if 'correct' in user_answer:
-        user_answer = user_answer.replace('_correct', '')
-        quiz_id = int(user_answer.split('quiz_id=')[1])
-        completed, score = 1, 1
-        correct_answer = None
-    else:
-        quiz_id = int(user_answer.split('quiz_id=')[1])
-        completed, score = 0, 0
-        correct_answer = await fetch_correct_answer(quiz_id)
-
-    return quiz_id, completed, score, correct_answer

@@ -2,13 +2,13 @@ from telegram_bot.bot_message_generators.create_inline_keyboard import create_in
 from telegram_bot.bot_entities.bot_commands import BotCommands
 
 
-async def create_start_quiz_menu(bot, username, chat_id, message_id, quantity_unique_questions, topic):
-    message = f'{username}, по данной теме Вам доступно {quantity_unique_questions} вопросов!'
+async def create_start_quiz_menu(bot, username, chat_id, message_id, quantity_unique_questions, topic, difficult):
+    message = f'{username}, по теме {topic}({difficult}) Вам доступно {quantity_unique_questions} вопросов!'
 
     button_parameters = {}
 
     if quantity_unique_questions > 0:
-        button_parameters = {'Начать викторину': f'send_question_{topic}'}
+        button_parameters = {'Начать викторину': f'send_question_topic={topic}_difficult={difficult}'}
 
     button_parameters['Вернуться назад'] = BotCommands.SELECT_QUIZ.value
 
