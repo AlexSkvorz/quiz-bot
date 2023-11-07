@@ -12,7 +12,7 @@ async def scrap_data():
                 topic=item["topic"],
                 difficult=item["difficult"],
                 question=item["question"],
-                answers=json.dumps(item["answers"],ensure_ascii=False),
+                answers=json.dumps(item["answers"], ensure_ascii=False),
                 correct_answer=item["correct_answer"]
             )
         return True
