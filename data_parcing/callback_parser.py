@@ -12,12 +12,13 @@ async def parse_user_choices(user_choice):
 
 async def parse_user_answer(user_answer):
     if 'correct' in user_answer:
-        user_answer = user_answer.replace('_correct', '')
-        quiz_id = int(user_answer.split('quiz_id=')[1])
+        user_answer = user_answer.replace('_correct', '').split('quiz_id=')
+        quiz_id = int(user_answer[1])
         completed, score = 1, 1
         correct_answer = None
     else:
-        quiz_id = int(user_answer.split('quiz_id=')[1])
+        user_answer = user_answer.split('quiz_id=')
+        quiz_id = int(user_answer[1])
         completed, score = 0, 0
         correct_answer = await fetch_correct_answer(quiz_id)
 
