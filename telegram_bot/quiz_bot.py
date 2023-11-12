@@ -14,6 +14,8 @@ from telegram_bot.bot_handlers.handle_download_json import handle_download_json
 from telegram_bot.bot_handlers.handle_to_start import handle_to_start
 from telegram_bot.bot_handlers.handle_view_user_achievements import handle_view_user_achievements
 
+from telegram_bot.access_decorator import admin_required
+
 
 class QuizBot:
     def __init__(self):
@@ -56,6 +58,7 @@ class QuizBot:
             self.bot.register_message_handler(download_json_callback)
 
         @self.bot.message_handler(content_types=['document'])
+        @admin_required
         async def download_json_callback(message):
             await handle_download_json(bot=self.bot, message=message)
 
