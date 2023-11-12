@@ -4,13 +4,13 @@ from telegram_bot.bot_entities.bot_commands import BotCommands
 
 
 async def send_user_statistic_menu(bot, username, chat_id, message_id, topic_scores, total_score):
-    message = f"<b>{username}</b>, а вот и твои результаты! Давай посмотрим👀, какие темы ты знаешь лучше:\n"
+    message = f"<b>{username}</b>, а вот и твои результаты! Давай посмотрим, какие темы ты знаешь лучше👀\n"
     point_word_form = get_word_form(quantity=total_score, word="балл")
 
     for topic, score in topic_scores.items():
         message += f"\n♦️<b>{topic}</b> (общий балл: <b>{score}</b>)\n"
 
-    message += f"\nВ сумме ты набрал <b>{total_score}</b> {point_word_form}, но я уверен, что ты можешь больше!❤️‍🔥"
+    message += f"\nВ сумме ты набрал(а) <b>{total_score}</b> {point_word_form}, но я уверен, что ты можешь больше!❤️‍🔥"
 
     markup = create_inline_keyboard(
         button_parameters={

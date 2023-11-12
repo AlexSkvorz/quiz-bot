@@ -5,7 +5,7 @@ from telegram_bot.bot_entities.bot_commands import BotCommands
 
 async def send_welcome_message(bot, chat_id, message_id, username, user_role):
 
-    welcome_message = (f'Рад видеть тебя, <b>{username}</b>! Ты уже учавствовал в викторине сегодня? Думаю, самое '
+    welcome_message = (f'Рад видеть тебя, <b>{username}</b>! Ты уже учавствовал(а) в викторине сегодня? Думаю, самое '
                        f'время начать:')
 
     button_parameters = {
