@@ -5,8 +5,13 @@ from telegram_bot.bot_entities.bot_commands import BotCommands
 
 async def create_start_quiz_menu(bot, username, chat_id, message_id, quantity_unique_questions, topic, difficult):
     word_form = get_word_form(quantity=quantity_unique_questions, word="вопросы")
-    message = (f'<b>{username}</b>, на тему {topic} ({difficult}) у меня есть {quantity_unique_questions} {word_form}'
-               f', реши их все!🤪')
+    message = f'<b>{username}</b>, на тему {topic} ({difficult}) у меня есть {quantity_unique_questions} {word_form}'
+
+    if quantity_unique_questions != 0:
+        message += f', реши их все!🤪'
+
+    else:
+        message += f', выбери другую!🤪'
 
     button_parameters = {}
 
