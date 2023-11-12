@@ -21,7 +21,12 @@ async def send_welcome_message(bot, chat_id, message_id, username, user_role):
     )
 
     if message_id is None:
-        await bot.send_message(chat_id, welcome_message, reply_markup=markup)
+        await bot.send_message(
+            chat_id=chat_id,
+            text=welcome_message,
+            reply_markup=markup,
+            parse_mode='html'
+        )
     else:
         await bot.edit_message_text(
             chat_id=chat_id,
