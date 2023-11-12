@@ -9,7 +9,6 @@ async def create_start_quiz_menu(bot, username, chat_id, message_id, quantity_un
 
     if quantity_unique_questions != 0:
         message += f', реши их все!🤪'
-
     else:
         message += f', выбери другую!🤪'
 
