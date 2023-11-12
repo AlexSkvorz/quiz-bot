@@ -5,9 +5,9 @@ from telegram_bot.bot_entities.bot_commands import BotCommands
 async def create_next_quiz_step(bot, chat_id, message_id, correct_answer, topic, difficult):
 
     if correct_answer is None:
-        message = f'Вы правильно ответили на вопрос!'
+        message = f'Всё <b>верно</b>, поздравляю! Продолжай в том же духе💪'
     else:
-        message = f'К сожалению, Вы ошиблись. Верный ответ: {correct_answer[0]}'
+        message = f'Упс, кажется, нужно было подумать лучше... На самом деле правильный ответ - {correct_answer[0]}🫰'
 
     markup = create_inline_keyboard(
         button_parameters={
@@ -20,5 +20,6 @@ async def create_next_quiz_step(bot, chat_id, message_id, correct_answer, topic,
         chat_id=chat_id,
         message_id=message_id,
         text=message,
+        parse_mode='html',
         reply_markup=markup
     )

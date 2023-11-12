@@ -3,7 +3,7 @@ from telegram_bot.bot_entities.bot_commands import BotCommands
 
 
 async def send_out_questions(bot, chat_id, message_id, username):
-    message = f'{username}, вопросы в данной теме закончились!'
+    message = f'{username}, для тебя вопросы в данной теме <b>закончились</b>, выбери другую!'
 
     markup = create_inline_keyboard(
         button_parameters={
@@ -15,5 +15,6 @@ async def send_out_questions(bot, chat_id, message_id, username):
         chat_id=chat_id,
         message_id=message_id,
         text=message,
+        parse_mode='html',
         reply_markup=markup
     )
