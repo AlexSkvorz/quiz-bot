@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 asyncio = "*"
 telebot = "*"
-aiohttp = "*"
 aiosqlite = "*"
 pymorphy2 = "*"
 
