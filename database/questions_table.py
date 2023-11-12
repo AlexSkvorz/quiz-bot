@@ -52,8 +52,8 @@ async def fetch_unique_question(user_id, topic, difficult):
                                   "LEFT JOIN user_quiz_progress_table AS progress "
                                   "ON questions.quiz_id = progress.quiz_id AND progress.user_id = ? "
                                   "WHERE progress.user_id IS NULL AND questions.topic = ? AND questions.difficult = ? "
-                                  "LIMIT 1"
-                                  "", parameters=(user_id, topic, difficult,))
+                                  "ORDER BY RANDOM() LIMIT 1 ",
+                                  parameters=(user_id, topic, difficult,))
         query_result = await cursor.fetchall()
         return query_result
 
