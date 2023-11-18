@@ -15,11 +15,13 @@ async def handle_view_user_achievements(call, bot):
             total_score += score
             topic_scores[topic] = score
 
+    sorted_topic_scores = dict(sorted(topic_scores.items(), key=lambda user_score: user_score[1], reverse=True))
+
     await send_user_statistic_menu(
         chat_id=call.message.chat.id,
         bot=bot,
         message_id=call.message.message_id,
         username=call.from_user.username,
-        topic_scores=topic_scores,
+        topic_scores=sorted_topic_scores,
         total_score=total_score
     )
