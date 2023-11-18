@@ -8,6 +8,7 @@ asyncio = "*"
 telebot = "*"
 aiosqlite = "*"
 pymorphy2 = "*"
+aiohttp = "*"
 
 [dev-packages]
 
