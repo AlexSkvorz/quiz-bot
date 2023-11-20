@@ -3,8 +3,7 @@ from telegram_bot.bot_entities.bot_commands import BotCommands
 
 
 async def create_next_quiz_step(bot, chat_id, message_id, correct_answer, topic, difficult):
-
-    if correct_answer:
+    if type(correct_answer) is bool:
         message = f'Всё <b>верно</b>, поздравляю! Продолжай в том же духе💪'
     else:
         message = f'Упс, кажется, нужно было подумать лучше... На самом деле правильный ответ - {correct_answer[0]}🫰'
