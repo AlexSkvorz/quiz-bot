@@ -1,6 +1,6 @@
 from database.questions_table import fetch_unique_question
 from telegram_bot.bot_message_generators.quiz_question_generator import send_quiz_question
-from telegram_bot.bot_message_generators.end_of_quiz_message_generator import send_out_questions
+from telegram_bot.bot_message_generators.end_quiz_message_generator import send_out_questions
 from data_parcing.callback_parser import parse_user_choices
 import json
 

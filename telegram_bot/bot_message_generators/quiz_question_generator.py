@@ -1,4 +1,3 @@
-from telegram_bot.bot_entities.bot_commands import BotCommands
 from telegram_bot.bot_message_generators.create_inline_keyboard import create_inline_keyboard
 
 
