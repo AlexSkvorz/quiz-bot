@@ -1,0 +1,6 @@
+/.idea
+config/bot_config.py
+config/storage_config.py
+*__pycache__*
+database.db
+data_questions.json

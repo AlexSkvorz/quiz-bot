@@ -19,7 +19,8 @@ async def create_table():
 async def insert_questions(quiz_id, topic, difficult, question, answers, correct_answer):
     async with aiosqlite.connect(STORAGE_CONFIG['DB_NAME']) as db:
         await db.execute("INSERT OR IGNORE INTO questions_table"
-                         " (quiz_id, topic, difficult, question, answers, correct_answer) VALUES (?, ?, ?, ?, ?, ?)",
+                         " (quiz_id, topic, difficult, question, answers, correct_answer) "
+                         "VALUES (?, ?, ?, ?, ?, ?)",
                          parameters=(quiz_id, topic, difficult, question, answers, correct_answer)
                          )
         await db.commit()
@@ -62,8 +63,8 @@ async def fetch_unique_question(user_id, topic, difficult):
 
 async def fetch_correct_answer(quiz_id):
     async with aiosqlite.connect(STORAGE_CONFIG['DB_NAME']) as db:
-        cursor = await db.execute("SELECT correct_answer FROM questions_table "
-                                  "WHERE quiz_id = ?", parameters=(quiz_id,)
+        cursor = await db.execute("SELECT correct_answer FROM questions_table WHERE quiz_id = ?",
+                                  parameters=(quiz_id,)
                                   )
         query_result = await cursor.fetchone()
         return query_result
@@ -71,8 +72,8 @@ async def fetch_correct_answer(quiz_id):
 
 async def fetch_actual_topic_and_difficult(quiz_id):
     async with aiosqlite.connect(STORAGE_CONFIG['DB_NAME']) as db:
-        cursor = await db.execute("SELECT topic, difficult FROM questions_table "
-                                  "WHERE quiz_id = ?", parameters=(quiz_id,)
+        cursor = await db.execute("SELECT topic, difficult FROM questions_table WHERE quiz_id = ?",
+                                  parameters=(quiz_id,)
                                   )
         query_result = await cursor.fetchall()
         return query_result
@@ -81,6 +82,7 @@ async def fetch_actual_topic_and_difficult(quiz_id):
 async def fetch_question_difficult(topic):
     async with aiosqlite.connect(STORAGE_CONFIG['DB_NAME']) as db:
         cursor = await db.execute("SELECT DISTINCT difficult FROM questions_table WHERE topic = ? ",
-                                  parameters=(topic,))
+                                  parameters=(topic,)
+                                  )
         query_result = await cursor.fetchall()
         return query_result

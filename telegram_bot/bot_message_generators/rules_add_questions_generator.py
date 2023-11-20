@@ -2,7 +2,7 @@ from telegram_bot.bot_message_generators.create_inline_keyboard import create_in
 from telegram_bot.bot_entities.bot_commands import BotCommands
 
 
-async def form_rules_to_add_questions(bot, chat_id, message_id, username):
+async def form_rules_add_questions(bot, chat_id, message_id, username):
     message = f'<b>{username}</b>, чтобы добавить новые вопросы, пришли мне файл в формате <b>data_questions.json</b>'
 
     markup = create_inline_keyboard(

@@ -5,6 +5,7 @@ from config.storage_config import STORAGE_CONFIG
 
 async def scrap_data():
     data = read_from_json_file()
+
     try:
         for item in data:
             await insert_questions(

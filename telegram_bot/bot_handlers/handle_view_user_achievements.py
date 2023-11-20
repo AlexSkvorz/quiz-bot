@@ -6,6 +6,7 @@ async def handle_view_user_achievements(call, bot):
     user_id = call.from_user.id
     total_score = 0
     topic_scores = {}
+
     query_user_statistic_by_topic = await fetch_user_achievements(user_id)
 
     if query_user_statistic_by_topic:
