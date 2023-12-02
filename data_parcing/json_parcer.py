@@ -3,7 +3,7 @@ from database.questions_table import insert_questions
 from config.storage_config import STORAGE_CONFIG
 
 
-async def scrap_data():
+async def parce_data():
     data = read_from_json_file()
 
     try:
