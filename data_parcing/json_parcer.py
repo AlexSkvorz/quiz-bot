@@ -3,8 +3,8 @@ from database.questions_table import insert_questions
 from config.storage_config import STORAGE_CONFIG
 
 
-async def parce_data():
-    data = read_from_json_file()
+async def send_questions_to_database():
+    data = read_json_file()
 
     try:
         for item in data:
@@ -21,7 +21,7 @@ async def parce_data():
         return False
 
 
-def read_from_json_file():
+def read_json_file():
     with open(STORAGE_CONFIG['JSON_PATH'], mode='r', encoding='utf-8') as file:
         data = json.load(file)
     return data

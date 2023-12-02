@@ -1,5 +1,5 @@
 from config.storage_config import STORAGE_CONFIG
-from data_parcing.json_parcer import scrap_data
+from data_parcing.json_parcer import send_questions_to_database
 from telegram_bot.bot_message_generators.json_download_result_message_generator import form_download_result_message
 
 
@@ -15,7 +15,7 @@ async def handle_download_json(bot, message):
             with open(src, 'wb') as new_file:
                 new_file.write(downloaded_file)
 
-            download_result = await scrap_data()
+            download_result = await send_questions_to_database()
 
         else:
             download_result = False

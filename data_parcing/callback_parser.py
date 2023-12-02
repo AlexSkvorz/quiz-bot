@@ -1,4 +1,6 @@
 from database.questions_table import fetch_correct_answer
+from telegram_bot.bot_entities.user_answer import UserAnswer
+from telegram_bot.bot_entities.user_choice import UserChoice
 
 
 async def parse_user_choices(user_choice):
@@ -7,7 +9,10 @@ async def parse_user_choices(user_choice):
     user_choice = user_choice[0].split('topic=')
     topic = user_choice[1]
 
-    return topic, difficult
+    return UserChoice(
+        topic=topic,
+        difficult=difficult
+    )
 
 
 async def parse_user_answer(user_answer):
@@ -28,4 +33,9 @@ async def parse_user_answer(user_answer):
     if not correct_answer:
         correct_answer = await fetch_correct_answer(quiz_id)
 
-    return quiz_id, completed, score, correct_answer
+    return UserAnswer(
+        quiz_id=quiz_id,
+        completed=completed,
+        score=score,
+        correct_answer=correct_answer
+    )

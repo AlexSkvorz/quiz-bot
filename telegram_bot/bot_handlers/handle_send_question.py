@@ -6,9 +6,13 @@ import json
 
 
 async def handle_send_question(bot, call):
-    topic, difficult = await parse_user_choices(user_choice=call.data)
+    user_choice = await parse_user_choices(user_choice=call.data)
 
-    unique_question = await fetch_unique_question(user_id=call.from_user.id, topic=topic, difficult=difficult)
+    unique_question = await fetch_unique_question(
+        user_id=call.from_user.id,
+        topic=user_choice.topic,
+        difficult=user_choice.difficult
+    )
 
     try:
         quiz_id = unique_question[0][0]
