@@ -15,10 +15,12 @@ async def parse_user_answer(user_answer):
 
     if 'correct' in user_answer:
         user_answer = user_answer.replace('_correct', '')
-        completed, score = 1, 1
+        completed = 1
+        score = 1
         correct_answer = True
     else:
-        completed, score = 0, 0
+        completed = 0
+        score = 0
 
     user_answer = user_answer.split('quiz_id=')
     quiz_id = int(user_answer[1])
