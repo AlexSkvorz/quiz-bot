@@ -1,9 +1,8 @@
-from database.questions_table import fetch_unique_topics
 from telegram_bot.bot_message_generators.topics_menu_generator import create_topics_menu
 
 
-async def handle_create_quiz_menu(bot, chat_id, message_id):
-    query_result = await fetch_unique_topics()
+async def handle_create_quiz_menu(bot, chat_id, message_id, database):
+    query_result = await database.questions_table.fetch_unique_topics()
 
     unique_topics = [topic[0] for topic in query_result]
 

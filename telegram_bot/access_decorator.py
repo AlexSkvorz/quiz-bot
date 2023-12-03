@@ -1,6 +1,6 @@
 from functools import wraps
 from constants import ADMIN
-from database import users_table
+from database.tables import users_table
 
 
 def admin_required(func):

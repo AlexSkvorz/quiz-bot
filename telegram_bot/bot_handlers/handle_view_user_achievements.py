@@ -1,13 +1,12 @@
-from database.users_quiz_progress_table import fetch_user_achievements
 from telegram_bot.bot_message_generators.statistic_menu_generator import send_user_statistic_menu
 
 
-async def handle_view_user_achievements(call, bot):
+async def handle_view_user_achievements(call, bot, database):
     user_id = call.from_user.id
     total_score = 0
     topic_scores = {}
 
-    query_user_statistic_by_topic = await fetch_user_achievements(user_id)
+    query_user_statistic_by_topic = await database.user_quiz_progress_table.fetch_user_achievements(user_id)
 
     if query_user_statistic_by_topic:
         for user_stat in query_user_statistic_by_topic:
