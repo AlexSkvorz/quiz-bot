@@ -1,14 +1,13 @@
 import json
-from database.questions_table import insert_questions
 from config.storage_config import STORAGE_CONFIG
 
 
-async def send_questions_to_database():
+async def send_questions_to_database(database):
     data = read_json_file()
 
     try:
         for item in data:
-            await insert_questions(
+            await database.questions_table.insert_questions(
                 quiz_id=item["quiz_id"],
                 topic=item["topic"],
                 difficult=item["difficult"],

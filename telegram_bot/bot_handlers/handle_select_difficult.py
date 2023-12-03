@@ -1,12 +1,11 @@
-from database.questions_table import fetch_quantity_unique_questions
 from telegram_bot.bot_message_generators.start_quiz_generator import create_start_quiz_menu
 from data_parcing.callback_parser import parse_user_choices
 
 
-async def handle_select_difficult(bot, call):
+async def handle_select_difficult(bot, call, database):
     user_choice = await parse_user_choices(user_choice=call.data)
 
-    quantity_unique_questions = await fetch_quantity_unique_questions(
+    quantity_unique_questions = await database.questions_table.fetch_quantity_unique_questions(
         user_id=call.from_user.id,
         topic=user_choice.topic,
         difficult=user_choice.difficult

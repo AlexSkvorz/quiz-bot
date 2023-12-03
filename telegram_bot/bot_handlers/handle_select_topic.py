@@ -1,11 +1,10 @@
-from database.questions_table import fetch_question_difficult
 from telegram_bot.bot_message_generators.difficult_menu_generator import create_difficult_menu
 
 
-async def handle_select_topic(bot, call):
+async def handle_select_topic(bot, call, database):
     topic = call.data.replace('select_topic_', '')
 
-    query_result = await fetch_question_difficult(topic=topic)
+    query_result = await database.questions_table.fetch_question_difficult(topic=topic)
 
     question_difficult = [difficult[0] for difficult in query_result]
 

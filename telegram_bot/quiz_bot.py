@@ -18,39 +18,61 @@ from telegram_bot.access_decorator import admin_required
 
 
 class QuizBot:
-    def __init__(self):
+    def __init__(self, database):
         self.bot = AsyncTeleBot(BOT_CONFIG['TOKEN'])
+        self.database = database
 
         self.initialize_handlers()
 
     def initialize_handlers(self):
         @self.bot.message_handler(commands=[BotCommands.START.value])
         async def start(message):
-            await handle_start_command(bot=self.bot, message=message)
+            await handle_start_command(
+                bot=self.bot,
+                message=message,
+                database=self.database
+            )
 
         @self.bot.callback_query_handler(func=lambda call: call.data == BotCommands.SELECT_QUIZ.value)
         async def create_quiz_menu_callback(call):
             await handle_create_quiz_menu(
                 bot=self.bot,
                 chat_id=call.message.chat.id,
-                message_id=call.message.message_id
+                message_id=call.message.message_id,
+                database=self.database
             )
 
         @self.bot.callback_query_handler(func=lambda call: call.data.startswith(BotCommands.SELECT_TOPIC.value))
         async def select_topic_callback(call):
-            await handle_select_topic(bot=self.bot, call=call)
+            await handle_select_topic(
+                bot=self.bot,
+                call=call,
+                database=self.database
+            )
 
         @self.bot.callback_query_handler(func=lambda call: call.data.startswith(BotCommands.SELECT_DIFFICULT.value))
         async def select_difficult_callback(call):
-            await handle_select_difficult(bot=self.bot, call=call)
+            await handle_select_difficult(
+                bot=self.bot,
+                call=call,
+                database=self.database
+            )
 
         @self.bot.callback_query_handler(func=lambda call: call.data.startswith(BotCommands.SEND_QUESTION.value))
         async def send_question_callback(call):
-            await handle_send_question(bot=self.bot, call=call)
+            await handle_send_question(
+                bot=self.bot,
+                call=call,
+                database=self.database
+            )
 
         @self.bot.callback_query_handler(func=lambda call: call.data.startswith(BotCommands.SELECT_ANSWER.value))
         async def check_user_answer_callback(call):
-            await handle_check_user_answer(bot=self.bot, call=call)
+            await handle_check_user_answer(
+                bot=self.bot,
+                call=call,
+                database=self.database
+            )
 
         @self.bot.callback_query_handler(func=lambda call: call.data == BotCommands.ADD_QUESTIONS.value)
         async def add_questions_callback(call):
@@ -60,12 +82,24 @@ class QuizBot:
         @self.bot.message_handler(content_types=['document'])
         @admin_required
         async def download_json_callback(message):
-            await handle_download_json(bot=self.bot, message=message)
+            await handle_download_json(
+                bot=self.bot,
+                message=message,
+                database=self.database
+            )
 
         @self.bot.callback_query_handler(func=lambda call: call.data == BotCommands.TO_START.value)
         async def to_start_callback(call):
-            await handle_to_start(bot=self.bot, call=call)
+            await handle_to_start(
+                bot=self.bot,
+                call=call,
+                database=self.database
+            )
 
         @self.bot.callback_query_handler(func=lambda call: call.data == BotCommands.VIEW_ACHIEVEMENTS.value)
         async def view_user_achievements_callback(call):
-            await handle_view_user_achievements(bot=self.bot, call=call)
+            await handle_view_user_achievements(
+                bot=self.bot,
+                call=call,
+                database=self.database
+            )
